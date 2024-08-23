@@ -14,11 +14,13 @@ const perguntas = [
       alternativas: [
         {
           texto: "Isso é assustador!",
-          afirmacao: "afirmação",
+          afirmacao: ,
+          "No início ficou com medo  do que esssa tecnologia pode fazer.",
+          ""
         },
         {
           texto: "Isso é maravilhoso!",
-          afirmacao: "afirmação",
+          afirmacao: "Quis saber como usar IA no seu dia a dia.",
         },
       ],
     },
@@ -29,8 +31,10 @@ const perguntas = [
         {
           texto:
             "Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
-          afirmacao: "afirmação",
+          afirmacao: "Pensou que IA pode ajudar em tarefas da sua vida.",
+      ]
         },
+      
         {
           texto:
             "Escreve o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
@@ -92,7 +96,12 @@ const perguntas = [
   let historiaFinal = "";
 
 function mostraPergunta() {
+  if (atual >= perguntas.length) {
+    mostraResultado();
+    return;
+  }
     perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     mostraAlternativas();
 }
@@ -107,8 +116,19 @@ function mostraAlternativas(){
 }
 
 function respostaSelecionada(opcaoSelecionada){
-    const afirmacoes = opcaoSelecionada.afirmacoes;
-    historiaFinal = afirmacoes;
+    const afirmacoes = opcaoSelecionada.afirmacoes + " ";
+    historiaFinal += afirmacoes;
+    atual++;
+    mostraPergunta();
+}
+    function mostraResultado() {
+      textoPergunta.textContent = "Em 2049…";
+      textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
+  }
+  function respostaSelecionada(opcaoSelecionada){
+    const afirmacoes = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacoes + " ";
     atual++;
     mostraPergunta();
 }
